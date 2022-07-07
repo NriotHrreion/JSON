@@ -1,0 +1,11 @@
+{
+    "a_str": "HelloWorld",
+    "b_num": 0,
+    "c_bool": true,
+    "d_arr": [1, 2, 3, 4, "ABC", false, {}, null],
+    "e_obj": {
+        "value": 1000,
+        "data": "asdf"
+    },
+    "f_null": null
+}
