@@ -4,7 +4,9 @@ const Type = {
     NUMBER: "number",
     BOOLEAN: "boolean",
     NULL: "null",
-    NONE: "none"
+    NONE: "none",
+    OBJECT: "object",
+    ARRAY: "array"
 };
 
 class JSON {
@@ -35,7 +37,7 @@ class JSON {
          * @param {Type} type 
          * @return {any}
          */
-        function strToType(str, type) {
+        const strToType = (str, type) => {
             switch(type) {
                 case Type.STRING:
                     return str;
@@ -47,6 +49,9 @@ class JSON {
                     return null;
                 case Type.NONE:
                     return undefined;
+                // case Type.OBJECT:
+                // case Type.ARRAY:
+                //     return this.parse(str);
             }
         }
 
@@ -64,11 +69,28 @@ class JSON {
         str = str.replaceAll("\n", "");
 
         for(let i = 0; i < str.length; i++) {
-            var k = str[i];
+            // var k = str[i]; // debug
             switch(str.charCodeAt(i)) {
                 case 123: // {
                 case 91: // [
                     layer++;
+                    if(inPair) {
+                        // `c` => character
+                        // `tl` => temp layer
+                        var j = 0, c, tl;
+                        for(j; j < str.length && c != "}" && layer != tl; j++) {
+                            c = str[j];
+                            if(c == "{") tl++;
+                            if(c == "}") tl--;
+                        }
+                        
+                        var objStr = str.substring(i, j);
+                        result[tempTag] = this.parse(objStr);
+                        resetVars();
+                        inPair = false;
+                        
+                        i = j;
+                    }
                     break;
                 case 125: // }
                 case 93: // ]

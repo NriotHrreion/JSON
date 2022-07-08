@@ -1,9 +1,15 @@
 const JSON = require("../JSON");
 
 console.log(JSON.parse(`{
-    "aoietfdig": null,
-    "uiywiwetiweiutwer": "3t4rie",
-    "bbbbbbb": 7623482,
-    "cacacaca": true,
+    "testobj": {
+        "a": 1,
+        "b": "2",
+        "c": true,
+        "d": {
+            "e": false,
+            "f": null
+        }
+    },
+    "teststr": "Hello"
 }`));
 console.log(JSON.stringify({a: 1}));
