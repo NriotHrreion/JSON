@@ -101,10 +101,11 @@ class JSON {
                 case 55: // 7
                 case 56: // 8
                 case 57: // 9
-                    // if(inValue === Type.STRING && tempValueStart) {
-                    //     tempValue.type = inValue;
-                    //     tempValue.value += str[i];
-                    // }
+                    if(inValue === Type.STRING && tempValueStart) {
+                        tempValue.type = inValue;
+                        tempValue.value += str[i];
+                        break;
+                    }
                     if(!tempValueStart) tempValueStart = true;
                     inValue = Type.NUMBER;
                     tempValue.type = inValue;
